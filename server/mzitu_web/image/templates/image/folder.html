@@ -1,0 +1,8 @@
+<h1>{{ image_name }}</h1>
+
+<ul>
+    {% for file in images %}
+    <!-- <li><a href="/image/image/{{ file.id }}">{{ file.name }}</a></li> -->
+    <li><a href="file:///{{ file.path }}" target="blank">{{ file.name }}</a></li>
+    {% endfor %}
+</ul>

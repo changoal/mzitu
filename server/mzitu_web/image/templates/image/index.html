@@ -1,0 +1,7 @@
+<h1>image</h1>
+
+<ul>
+    {% for folder in folders %}
+    <li><a href="/image/files/{{ folder.id }}">{{ folder.name }}</a></li>
+    {% endfor %}
+</ul>
