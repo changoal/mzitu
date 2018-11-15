@@ -2,6 +2,6 @@
 
 <ul>
     {% for folder in folders %}
-    <li><a href="/image/files/{{ folder.id }}">{{ folder.name }}</a></li>
+    <li><a href="{% url 'image:folders' folder.id%}">{{ folder.name }}</a> </li>
     {% endfor %}
 </ul>
