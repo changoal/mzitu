@@ -24,6 +24,5 @@ class WallhavenPipeline(object):
 
     def process_item(self, item, spider):
         collection = self.db[spider.name]
-        # post = dict(item) if isinstance(item, Item) else item
         collection.insert_one(item)
         return item

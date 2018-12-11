@@ -8,13 +8,11 @@ from wallhaven.items import WallhavenItem
 
 class WallSpider(scrapy.Spider):
     name = 'wall'
-    allowed_domains = ['https://alpha.wallhaven.cc']
-    start_urls = ['https://alpha.wallhaven.cc/']
-
-    def start_requests(self):
-        for i in range(1, 5):
-            url = 'https://alpha.wallhaven.cc/latest?page=%s' % str(i)
-            yield Request(url, callback=self.parse)
+    # allowed_domains = ['wallhaven.cc']
+    start_urls = [
+        'https://alpha.wallhaven.cc/latest?page=%s' % str(i)
+        for i in range(1, 14445)
+    ]
 
     def parse(self, response):
         soup = BeautifulSoup(response.text, 'lxml')
@@ -25,7 +23,6 @@ class WallSpider(scrapy.Spider):
                 lis = ul_soup.find_all('li')
                 for li in lis:
                     a_soup = li.find('a', class_='preview')['href']
-                    print(a_soup)
                     yield Request(a_soup, callback=self.parse_image)
             else:
                 print("not found ul")
@@ -33,7 +30,6 @@ class WallSpider(scrapy.Spider):
             print("not found thumb-listing-page")
 
     def parse_image(self, response):
-        print('parse_image: ', response.url)
         data = WallhavenItem()
         data['_id'] = response.url.split('/')[-1]
         try:
