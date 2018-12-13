@@ -76,33 +76,20 @@ def get_all_img():
         if aaa == 0:
             aaa = 1
         else:
-            # folder_id = Folder.objects.get(path=path)['id']
             for file in os.listdir(path):
                 image = {
                     "name": file,
                     "path": path + "/" + file,
                     "size": os.path.getsize(path + "/" + file)
                 }
-                # folder.save()
                 print(image)
-
-        # for file in file_list:
-        #     data = {
-        #         "name": get_file_name(file),
-        #         'path': path + "\\" + file,
-        #         'size': os.path.getsize(path + "/" + file)
-        #     }
-        #     mzitu_img.insert_one(data)
-        #     print(data)
 
 
 def fromdb():
     f = mzitu_folder.find()
     for line in f:
         print(line['name'], line['path'], int(line['file_count']))
-        # print(line)
 
 
 if __name__ == '__main__':
-    # test()
     get_all_img()
